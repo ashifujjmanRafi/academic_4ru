@@ -48,6 +48,8 @@ def fig1():
 	plt.title('Binary')
 	plt.imshow(binary_img, cmap = 'gray')
 	
+	plt.savefig("fig1.jpg")
+	
 	plt.show()
 
 
@@ -118,7 +120,7 @@ def main():
     plt.title('Binary')
     plt.plot(binary, 'k')
     
-    
+    plt.savefig("fig2.jpg")
 
     plt.show()
 
