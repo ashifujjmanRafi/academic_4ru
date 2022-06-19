@@ -3,7 +3,7 @@ import cv2
 import numpy
 
 def fig1():
-	img_path = 'mountain.jpg'
+	img_path = 'mountain.jpeg'
 	
 	#print(img_path)
 
@@ -52,21 +52,11 @@ def fig1():
 	
 	plt.show()
 
-
-
-
-
-
-
-
-
-
-
-
+#showing histogram of image
 
 def main():
     # image path
-    path = 'mountain.jpg'
+    path = 'mountain.jpeg'
     
  
     
