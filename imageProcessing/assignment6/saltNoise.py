@@ -13,6 +13,7 @@ def salt_noise():
 
     #avaraging filter
     avg_kernal = np.array([[1,1,1],[1,1,1],[1,1,1]]) / 9
+    
     gaussain_kernal = np.array([[1,2,1],[2,4,2],[1,2,1]]) / 16
 
     avg_img = cv2.filter2D(gray, -1, avg_kernal)

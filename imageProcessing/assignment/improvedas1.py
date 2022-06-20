@@ -35,7 +35,6 @@ def histogramOfImage():
     g = cv2.calcHist([rgb],[1],None,[256],[0,256])
     b = cv2.calcHist([rgb],[2],None,[256],[0,256])
     gr = cv2.calcHist([gray],[0],None,[256],[0,256])
-
     img_show = [r,g,b,gr]
     img_title = ['Red','Green','Blue','Grayscale']
     im_plot(img_show,img_title)

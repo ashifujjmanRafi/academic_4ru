@@ -16,10 +16,12 @@ def histo(img):
 
 def conv(mat, kernel):
     row, col = mat.shape
+    
     r, c = kernel.shape[0] // 2, kernel.shape[1] // 2
     r, c = r * 2, c * 2
 
     new_image = np.zeros((row - r, col - c), dtype=np.uint8)
+
     for i in range(row - r):
         for j in range(col - c):
             x = np.sum(np.multiply(mat[i:3+i, j:3+j], kernel))
