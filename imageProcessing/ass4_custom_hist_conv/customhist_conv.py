@@ -6,7 +6,6 @@ import numpy as np
 
 def custom_hist(img):
     d = dict()
-
     for i in range(256):
         d[i]=0
 

@@ -64,6 +64,7 @@ def convulation(img):
     plt.show()
 
 def masking(img):
+    
     r,c = img.shape 
     mask = np.zeros((r,c),dtype = np.uint8)
     mask[50:120,80:200] = 255

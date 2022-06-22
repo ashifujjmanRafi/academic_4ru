@@ -38,6 +38,7 @@ def salt_noise():
     for i in range(len(img_set)):
         plt.subplot(3,2,i+1)
         plt.title(img_tittle[i])
+        
         plt.imshow(img_set[i],'gray')
     plt.savefig("upgrade assignment6")
     plt.tight_layout()
