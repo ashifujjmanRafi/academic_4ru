@@ -7,7 +7,7 @@ def main():
     red = rgb[:,:,0]
     green = rgb[:,:,1]
     blue = rgb[:,:,2]
-    
+    r,c = red.shape
     gray = np.zeros((r,c))
 
     gray = .299*red + .587*green +.114* blue
@@ -24,7 +24,9 @@ def main():
         else:
             plt.imshow(img_set[i],'gray')
         plt.title(img_tittle[i])
-    plt.show() 
+
+    plt.show()
+    
 
 if __name__ =='__main__':
     main()
