@@ -10,7 +10,7 @@ def imread():
 	
 	gray = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
 	print(gray.shape)
-	
+	#row collumb	
 	r,c = gray.shape
 	
 	
