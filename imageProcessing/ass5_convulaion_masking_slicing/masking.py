@@ -12,7 +12,7 @@ def main():
     #print(grayscale.shape)
 
     r,c = grayscale.shape
-    
+    #mask = grayscale.copy()
     mask = np.zeros((r,c),dtype=np.uint8)
     mask[40:120,50:250] = 255
     mask = mask & grayscale

@@ -25,15 +25,6 @@ def imread():
 	epsilon = 10e-6
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	img_set = [rgb,gray,convo]
 	img_title = ['RGB','GRAY','CONVULATION']
 	
