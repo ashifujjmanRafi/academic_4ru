@@ -9,11 +9,11 @@ def main():
 	gray = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
 	
 	
-	_,binary_img = cv2.threshold(gray,125,255,cv2.THRESH_BINARY)
+	_,binary_img = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
 	print(binary_img.shape)
 
 	
-	kernal1 = np.ones((3,3),dtype=np.uint8)
+	kernal1 = np.ones((5,5),dtype=np.uint8)
 	#sharpen kernal
 	kernal2 = np.array([[0,-1,0],[-1,5,-1],[0,-1,0]],dtype=np.uint8)
 	#edge kernal
