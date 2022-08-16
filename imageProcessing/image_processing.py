@@ -4,7 +4,11 @@ def main():
     img_path = "mountain.jpeg"
     print(img_path)
     rgb = plt.imread(img_path)
-   
+    
+    red = rgb[:,:,0]
+    green = rgb[:,:,1]
+    blue = rgb[:,:,2]
+    print(red.shape)
     gray = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
     print(gray.shape)
     red = rgb[:,:,0]

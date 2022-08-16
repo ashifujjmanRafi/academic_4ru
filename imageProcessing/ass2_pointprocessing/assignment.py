@@ -22,6 +22,7 @@ def main():
     row, col = grayscale.shape
     t1,t2 = 50,120
     s = np.zeros((row, col), dtype=np.uint8)
+    print(s.shape)
     for x in range(row):
         for y in range(col):
             if grayscale[x][y]>=t1 and grayscale[x][y]<=t2:
