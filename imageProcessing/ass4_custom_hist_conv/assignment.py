@@ -4,15 +4,22 @@ import cv2
 
 
 
+# def histo(img):
+#     d = dict()
+#     for x in range(256):
+#         d[x] = 0  
+#     for x in img:
+#         for y in x:
+#             d[y] += 1
+#     return d
 def histo(img):
     d = dict()
-    for x in range(256):
-        d[x] = 0  
-    for x in img:
-        for y in x:
-            d[y] += 1
+    for i in range(256):
+        d[i]=0
+    for i in range(img):
+        for j in range(i):
+            d[j] += 1
     return d
-
 
 def conv(mat, kernel):
     row, col = mat.shape

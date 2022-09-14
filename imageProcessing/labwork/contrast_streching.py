@@ -206,6 +206,20 @@ def assignment7_10(gray):
         plt.plot(plot_set[i])
     plt.show()
 
+def assignment8(binary):
+    kernal = np.ones((5, 5), dtype=np.uint8)
+
+    ero = cv2.erode(binary, kernal)
+    dil = cv2.dilate(binary, kernal)
+
+    opening = cv2.erode(dil, kernal)
+    closing = cv2.dilate(ero, kernal)
+    img_set = [ero, dil, opening, closing]
+
+    for i in range(len(img_set)):
+        plt.subplot(2,2,i+1)
+        plt.imshow(img_set[i],'gray')
+    plt.show() 
 
 def main():
 
@@ -221,19 +235,9 @@ def main():
     # assignment7_10(gray)
 
     _, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
-    kernal = np.ones((5, 5), dtype=np.uint8)
-
-    ero = cv2.erode(binary, kernal)
-    dil = cv2.dilate(binary, kernal)
-
-    opening = cv2.erode(dil, kernal)
-    closing = cv2.dilate(ero, kernal)
-    img_set = [ero, dil, opening, closing]
-
-    for i in range(len(img_set)):
-        plt.subplot(2,2,i+1)
-        plt.imshow(img_set[i],'gray')
-    plt.show()    
+    #assignment8(binary)  
+    
+    
 
 
 
