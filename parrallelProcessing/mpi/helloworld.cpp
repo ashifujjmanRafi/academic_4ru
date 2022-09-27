@@ -1,18 +1,17 @@
-// #include <bits/stdc++.h>
-#include <stdio.h>
+#include <bits/stdc++.h>
 #include <mpi.h>
-// using namespace std;
+using namespace std;
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
-    MPI_INIT(NULL, NULL);
+    MPI_Init(NULL, NULL);
     int rank, total_process;
     MPI_Comm_size(MPI_COMM_WORLD, &total_process);
-    MPI_Comm_rank(MPI_COMM_WORLD.& rank);
+    MPI_Comm_rank(MPI_COMM_WORLD,&rank);
 
-    cout << "Total process " << total_process << " ITs is running in " << rank << endl;
+    cout << "Total process " << total_process << " It's  running in " << rank << endl;
 
-    MPI_FINALIZE();
+    MPI_Finalize();
     return 0;
 }
