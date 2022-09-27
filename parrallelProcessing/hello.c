@@ -1,5 +1,5 @@
-#include <mpi.h>
 #include <stdio.h>
+#include <mpi.h>
 int main(int argc ,char **argv){
     int my_id , root_process,ierr,num_processes;
     MPI_Status status;
