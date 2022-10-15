@@ -13,7 +13,7 @@ def shifting():
 	r,c = gray.shape
 
 	left,right,narrow = gray.copy(),gray.copy(),gray.copy()
-	
+	#narrow band shifting
 	for i in range(r):
 		for j in range(c):
 			if(narrow[i][j]<=100):
@@ -23,8 +23,9 @@ def shifting():
 	
 	
 	#print(right.shape)
-	
+	#left shifting
 	left = left -80
+	#right shifting
 	right = right+50
 	
 	org_calchist = cv2.calcHist([gray],[0],None,[256],[0,255])
