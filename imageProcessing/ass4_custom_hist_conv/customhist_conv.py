@@ -8,7 +8,6 @@ def custom_hist(img):
     d = dict()
     for i in range(256):
         d[i]=0
-
     for i in img:
         for j in i:
             d[j] += 1
