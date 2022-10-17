@@ -12,14 +12,27 @@ def main():
     print(grayscale.shape)
 
     r,c = grayscale.shape
-    
-    bit1 = grayscale & 1
+    # 00000001
+    bit1 = grayscale & 1 
+     
+    # bit slicing for 1st bit
+    # bit1 = np.zeros((r,c),dtype=np.uint8)
+    # for i in range(r):
+    #     for j in range(c):
+    #         bit1[i][j] = grayscale[i][j] & 1
+    # 00000010
     bit2 = grayscale & 2
+    # 00000100
     bit3 = grayscale & 4
+    # 00001000
     bit4 = grayscale & 8
+    # 00010000
     bit5 = grayscale & 16
+    # 00100000
     bit6 = grayscale & 32
+    # 01000000
     bit7 = grayscale & 64
+    # 10000000
     bit8 = grayscale & 128
 
     img_set =[bit1,bit2,bit3,bit4,bit5,bit6,bit7,bit8]
