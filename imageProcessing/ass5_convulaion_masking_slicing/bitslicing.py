@@ -14,12 +14,14 @@ def main():
     r,c = grayscale.shape
     # 00000001
     bit1 = grayscale & 1 
-     
+
     # bit slicing for 1st bit
     # bit1 = np.zeros((r,c),dtype=np.uint8)
     # for i in range(r):
     #     for j in range(c):
-    #         bit1[i][j] = grayscale[i][j] & 1
+    #         if(grayscale[i][j]&1):
+    #             bit1[i][j] = grayscale[i][j]
+            
     # 00000010
     bit2 = grayscale & 2
     # 00000100
