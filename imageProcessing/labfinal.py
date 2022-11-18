@@ -26,6 +26,7 @@ def main():
     # morphological(binary)
     # histogramequalization(gray)
     # frequencydomain(gray)
+    #jpg2png(img_path)
 
 def imshow(img_set,x,y):
     for i in range(len(img_set)):
@@ -268,6 +269,15 @@ def frequencydomain(img):
     img_set = [img,h_abs,sdh,hp_abs,sdhp]
     imshow(img_set,2,3)
 
+def jpg2png(img_path):
+    name,format = img_path.split(".")
+    if(format == 'jpeg' or format=='jpg'):
+        img = cv2.imread(img_path)
+        cv2.imwrite(name+".png",img)
+    else:
+        img = cv2.imread(img_path)
+        cv2.imwrite(name+".jpg",img)
+    
 
 
 if __name__=="__main__":
