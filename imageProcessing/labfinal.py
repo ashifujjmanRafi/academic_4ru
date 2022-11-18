@@ -31,20 +31,20 @@ def main():
     img_path = "mountain.jpeg"
     rgb = plt.imread(img_path)
     gray = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
+    _,binary = cv2.threshold(gray,126,255,cv2.THRESH_BINARY)
+    #imginhist(rgb,gray,binary)
+    #assignment2(gray)
     #assignment3(gray)
     #bitslici_masking(gray)
     #addnoise(gray)
+    #shifting(gray)
+    #morphological(binary)
+    #histogramequalization(gray)
 
 
 
-def imginhist():
-    img_path = "mountain.jpeg"
-    rgb = plt.imread(img_path)
-    gray = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
+def imginhist(rgb,gray,binary):
 
-
-
-    _,binary = cv2.threshold(gray,126,255,cv2.THRESH_BINARY)
     r,c = gray.shape
     binary2 = gray.copy()
     for i in range(r):
@@ -65,7 +65,8 @@ def imginhist():
 
     hist_list=[r,g,b,g,bi] 
     img_set = [rgb,gray,binary,binary2,red,green,blue]
-    imshow(img_set)
+    imshow(img_set,4,2)
+    plotshow(hist_list,3,2)
 
 def imshow(img_set,x,y):
     for i in range(len(img_set)):
@@ -73,10 +74,7 @@ def imshow(img_set,x,y):
         plt.imshow(img_set[i],'gray')
     plt.show()
 
-def assignment2():
-    img_path ="mountain.jpeg"
-    rgb = plt.imread(img_path)
-    img = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
+def assignment2(img):
     r,c = img.shape
     t1,t2 = 100,140
     #first condition:s = 100, if r >= T1 and r <= T2; otherwise s = 10.
@@ -151,9 +149,61 @@ def addnoise(x):
     plt.imshow(img,'gray')
     plt.show()
 
+def plotshow(plt_list,x,y):
+    for i in range(len(plt_list)):
+        plt.subplot(x,y,i+1)
+        plt.plot(plt_list[i],'red')
+    plt.show()
 
+def shifting(img):
+    rs = img.copy()
+    ls = img.copy()
+    ns = img.copy()
+    rs = rs -80
+    ls = ls+50
+    r,c = img.shape
+    for i in range(r):
+        for j in range(c):
+            if(ns[i][j]<=30):
+                ns[i][j]=30
+            elif(ns[i][j]>=60):
+                ns[i][j]=80
+    imgh = cv2.calcHist([img],[0],None,[256],[0,256])
+    rsh = cv2.calcHist([rs],[0],None,[256],[0,256])
+    lsh = cv2.calcHist([ls],[0],None,[256],[0,256])
+    nsh = cv2.calcHist([ns],[0],None,[256],[0,256])
+    plt_list=[imgh,rsh,lsh,nsh]
+    plotshow(plt_list,2,2)
 
+def morphological(binary):
+    r,c = binary.shape
+    kernal = np.ones((3,3),np.uint8)
+    x,y = kernal.shape
+
+    img_erosion = cv2.erode(binary,kernal)
+    img_dialation = cv2.dilate(binary,kernal)
+
+    img_opening = cv2.dilate(img_erosion,kernal)
+    img_closing = cv2.erode(img_dialation,kernal)
+
+    #custom morphological operation
+    cus_ero = np.zeros((r-x-1,c-y-1))
+    cus_dia = np.zeros((r-x-1,c-y-1))
+    for i in range(r-x-1):
+        for j in range(c-y-1):
+            sum = np.sum(np.multiply(binary[i:i+x,j:j+y],kernal))
+            if(sum==2295):
+                cus_ero[i][j]=255
+            elif(sum>=255):
+                cus_dia[i][j]=255
+    img_set=[img_erosion,img_dialation,img_opening,img_closing,cus_ero,cus_dia]
+    imshow(img_set,3,2)
+
+def histogramequalization(img):
+    equlize_hist = cv2.equalizeHist(img)
+    n_hist = cv2.calcHist([img],[0],None,[256],[0,256])
+    e_hist = cv2.calcHist([equlize_hist],[0],None,[256],[0,256])
+    plt_list=[n_hist,e_hist]
+    plotshow(plt_list,1,2)
 if __name__=="__main__":
-    #imginhist()
-    #assignment2()
     main()
