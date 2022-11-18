@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="rafi-layer">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/imageProcessing/ass12/rafi-layer.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

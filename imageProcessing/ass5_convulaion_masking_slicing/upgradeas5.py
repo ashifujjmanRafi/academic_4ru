@@ -8,15 +8,7 @@ gray = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
 
 def bitslicing(img):
     r,c = img.shape
-    bit1 = np.zeros((r,c),dtype = np.uint8)
-    bit2 = np.zeros((r,c),dtype = np.uint8)
-    bit3 = np.zeros((r,c),dtype = np.uint8)
-    bit4 = np.zeros((r,c),dtype = np.uint8)
-    bit5 = np.zeros((r,c),dtype = np.uint8)
-    bit6 = np.zeros((r,c),dtype = np.uint8)
-    bit7 = np.zeros((r,c),dtype = np.uint8)
-    bit8 = np.zeros((r,c),dtype = np.uint8)
-
+   
     bit1 = img & 1
     bit2 = img & 2
     bit3 = img & 4
