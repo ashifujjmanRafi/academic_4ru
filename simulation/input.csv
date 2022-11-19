@@ -1,7 +1,0 @@
-Activity, Predecessor, Duration
-A, -, 5
-B, A, 4
-C, A, 5
-D, B, 6
-E, C, 3
-F, DE, 4
