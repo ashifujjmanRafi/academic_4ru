@@ -42,10 +42,6 @@ while True:
 
 plt.plot(fcx,fcy,'red')
 plt.plot(bcx,bcy)
-
+print("at time :",t)
 print("The fighter is cought: ", caught)
-
 plt.show()
-
-
-print(t)
