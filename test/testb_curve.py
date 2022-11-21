@@ -59,7 +59,3 @@ while run:
         pg.draw.circle(win,(0,255,0),(x,y),2)
         pg.display.update()
 pg.quit()
-
-
-
-pg.quit()

@@ -12,7 +12,7 @@ class Activity:
 
 index = []
 activities = {}
-file = './input.txt'
+file = './input2.txt'
 
 for lines in open(file):
     words = lines.rstrip('\n').split(',')
