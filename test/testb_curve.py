@@ -1,13 +1,14 @@
-import pygame as pg
+import pygame as pg 
 pg.init()
 
 win = pg.display.set_mode((1000,1000))
 pg.display.set_caption("b_curve")
-f  = pg.font.get_fonts()[0]
-font = pg.font.SysFont(f,32)
-white = (255,255,255)
 
-point0 = font.render("po",True,white)
+f = pg.font.get_fonts()[0]
+font = pg.font.SysFont(f,32)
+white = (255,255,200)
+
+point0  = font.render("p0",True,white)
 point1 = font.render("p1",True,white)
 point2 = font.render("p2",True,white)
 point3 = font.render("p3",True,white)
@@ -19,25 +20,25 @@ rect3 = point3.get_rect()
 
 p0 = (100,500)
 p1 = (100,100)
-p2 = (600,100)
-p3 = (600,600)
+p2 = (500,100)
+p3 = (600,500)
 
+run = True
 speed = .004
-t = 0 
-run  = True
+t = 0
 
 while run:
     win.fill((0,0,0))
-    pg.time.delay(100)
+    pg.time.delay(200)
 
     for event in pg.event.get():
         if(event.type == pg.QUIT):
             run = False
-
     while(t<1):
         t += speed
+
         bz0 = (pow(1-t,3)*p0[0],pow(1-t,3)*p0[1])
-        bz1 = (pow(1-t,2)*t*3*p1[0],pow(1-t,2)*t*3*p1[1])
+        bz1 = (pow(1-t,2)*3*t*p1[0],pow(1-t,2)*3*t*p1[1])
         bz2 = ((1-t)*3*t*t*p2[0],(1-t)*3*t*t*p2[1])
         bz3 = (pow(t,3)*p3[0],pow(t,3)*p3[1])
         p = (bz0[0]+bz1[0]+bz2[0]+bz3[0],bz0[1]+bz1[1]+bz2[1]+bz3[1])
@@ -56,7 +57,6 @@ while run:
         pg.draw.line(win,(0,255,0),p0,p1,1)
         pg.draw.line(win,(0,255,0),p2,p3,1)
         pg.draw.circle(win,(255,0,0),(x,y),2)
+
         pg.display.update()
 pg.quit()
-
-

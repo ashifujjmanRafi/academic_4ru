@@ -25,7 +25,7 @@ def main():
     # shifting(gray)
     # morphological(binary)
     # histogramequalization(gray)
-    # frequencydomain(gray)
+    frequencydomain(gray)
     #jpg2png(img_path)
 
 def imshow(img_set,x,y):
@@ -203,8 +203,8 @@ def histogramequalization(img):
     plt_list=[n_hist,e_hist]
     plotshow(plt_list,1,2)
 
-def frequencydomain(img):
 
+def frequencydomain(img):
     r,c = img.shape
     #fd = frequency domain
     #fds = centered frequency
@@ -268,6 +268,7 @@ def frequencydomain(img):
 
     img_set = [img,h_abs,sdh,hp_abs,sdhp]
     imshow(img_set,2,3)
+
 
 def jpg2png(img_path):
     name,format = img_path.split(".")

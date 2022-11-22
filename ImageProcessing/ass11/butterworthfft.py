@@ -2,105 +2,93 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 
-def butterworthFilter(img):
-
-    #converted to frequency domain
-    #fd= fre domain
-    #sd = spatial domain
-    # sd = spatial domain, fd = frequency domain, fds = shifted frequency domain
-    # hfds = high pass filtered in frequency domain shifted ,hfd = high pass filtered in frequency domain
-    # hsd = high pass filtered in spatial domain
-    #sd > fd > fds > h*fds > hfds > hfd > hsd
-
+def frequencydomain(img):
+    r,c = img.shape
+    #fd = frequency domain
+    #fds = centered frequency
+    #h = filter
+    #fdsh = filtered in frequency domain
+    #fdh = invert shifted
+    #sdh = invert in spatial domain
     fd = np.fft.fft2(img)
     fds = np.fft.fftshift(fd)
-    fds_abs = np.log1p(np.abs(fds))
+    #for printing fds_abs=np.log1p(np.abs(fds))
+    #making low pass filter
 
-    #create butterworth lowpass filter
-    m,n = img.shape
-    h = np.zeros((m,n),dtype=np.float32)
-    #cuttoff fre 
-    d0 = 80
-    for u in range(m):
-        for v in range(n):
-            d = np.sqrt((u-m/2)**2+(v-n/2)**2)
-            h[u,v] = 1/(1+(d/d0)**2)
-    # filtering image
-    ffds = fds*h
-    ffds_abs = np.log1p(np.abs(ffds))
-    #converted to spatial domain
-    ffd = np.fft.ifftshift(ffds)
-    fsd = np.abs(np.fft.ifft2(ffd))
+    #butterworth filter
+    h = np.zeros((r,c),dtype=np.float32)
+    d0 = 20
+    for u in range(r):
+        for v in range(c):
+            d = np.sqrt((u-r/2)**2+(v-c/2)**2)
+            h[u,v]=1/(1+(d/d0)**2)
+    #for printing 
+    h_abs=np.log1p(np.abs(h))
+    #filtered in frequency domain
+    fdsh = fds*h_abs
+    #for printing fdsh_abs=np.log1p(np.abs(fdsh))
+    #inverse in spatial domain
+    #inverse shifting
+    fdh = np.fft.ifftshift(fdsh)
+    #spatial domain
+    sdh = np.abs(np.fft.ifft2(fdh))
+
+    #high pass filter
+    hp = 1 - h
+    hp_abs = np.log1p(np.abs(hp))
+    #filtered in frequency domain
+    fdshp =  fds*hp
+    fdhp = np.fft.ifftshift(fdshp)
+    sdhp = np.abs(np.fft.ifft2(fdhp))
+
+    img_set = [img,h_abs,sdh,hp_abs,sdhp]
+    imshow(img_set,2,3)
 
 
-    #butterworth high pass filter
-    hp = 1-h
-    #filtering image
-    hfds = fds*hp
-    hfds_abs = np.log1p(np.abs(hfds))
-    #converted to spatial domain
-    hffd = np.fft.ifftshift(hfds)
-    hsd = np.abs(np.fft.ifft2(hffd))
+    #gaussain filter
+    h = np.zeros((r,c),dtype=np.float32)
+    d0 = 40
+    for u in range(r):
+        for v in range(c):
+            d = np.sqrt((u-r/2)**2+(v-c/2)**2)
+            h[u,v] = np.exp(-(d**2)/(2*d0*d0))
 
-    img_set = [img,fds_abs,ffds_abs,fsd,hfds_abs,hsd]
+    h_abs = np.log1p(np.abs(h))
+    fdsh = fds*h
+    fdh = np.fft.ifftshift(fdsh)
+    sdh = np.abs(np.fft.ifft2(fdh))
+    #highpass
+    hp = 1 - h
+    hp_abs = np.log1p(np.abs(hp))
+    fdshp = fds*hp
+    fdhp = np.fft.ifftshift(fdshp)
+    sdhp = np.abs(np.fft.ifft2(fdhp))
+
+    img_set = [img,h_abs,sdh,hp_abs,sdhp]
+    imshow(img_set,2,3)
+
+
+
+
+def imshow(img_set,x,y):
     for i in range(len(img_set)):
-        plt.subplot(2,3,i+1)
+        plt.subplot(x,y,i+1)
         plt.imshow(img_set[i],'gray')
-    plt.savefig('butterworth.png')
+    plt.savefig('result')
     plt.show()
 
-
-
-def gaussainFilter(img):      
-    
-    m,n = img.shape
-
-    fd = np.fft.fft2(img)
-    fds = np.fft.fftshift(fd)
-    fds_abs = np.log1p(np.abs(fds))
-
-    #create filter
-    h = np.zeros((m,n),dtype=np.float32)
-    d0 = 10 
-    # cutoff fre
-    for u in range(m):
-        for v in range(n):
-            d = np.sqrt((u-m/2)**2+(v-n/2)**2)
-            h[u,v] = np.exp((-d**2)/(2*d0*d0))
-    #filtered in fd
-    ffds= fds*h
-    ffds_abs = np.log1p(np.abs(ffds))
-    #converted to spatial domain
-    ffd = np.fft.ifftshift(ffds)
-    fsd = np.abs(np.fft.ifft2(ffd))
-
-
-    #high frequency
-    hp = 1-h
-    hffds = fds*hp
-    hffds_abs = np.log1p(np.abs(hffds))
-
-    hffd = np.fft.ifftshift(hffds)
-    hfsd = np.abs(np.fft.ifft2(hffd))
-
-    img_set = [img,fds_abs,ffds_abs,fsd,hffds_abs,hfsd]
-    for i in range(len(img_set)):
-        plt.subplot(2,3,i+1)
-        plt.imshow(img_set[i],'gray')
-    plt.savefig('gaussain.png')
+def plotshow(plt_list,x,y):
+    for i in range(len(plt_list)):
+        plt.subplot(x,y,i+1)
+        plt.plot(plt_list[i],'red')
     plt.show()
-
-
-
-
 
 
 def main():
     img_path = 'mountain.jpeg'
     rgb = plt.imread(img_path)
     gray = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
-    butterworthFilter(gray)
-    gaussainFilter(gray)
+    frequencydomain(gray)
     
 
 

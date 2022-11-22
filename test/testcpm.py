@@ -1,16 +1,16 @@
 class Activity:
-    def __init__(self,idx,activity,duration)->None:
+    def __init__(self,idx,activity,duration):
         self.idx = idx
         self.activity = activity
         self.duration = duration
-        self.predeccesor = []
+        self.predecessor = []
         self.successor = []
         self.ef = 0
         self.es = 0
         self.ls = 0
         self.lf = 0
 
-file = './input2.txt'
+file = './input.txt'
 activities = {}
 index = []
 
@@ -24,31 +24,32 @@ for line in open(file):
     activities[idx] = Activity(idx,activity,duration)
 
     if(pre != ""):
-        predeccesor = pre.split(';')
-        for x in predeccesor:
-            activities[idx].predeccesor.append(int(x))
+        predecessor = pre.split(';')
+        for x in predecessor:
+            activities[idx].predecessor.append(int(x))
             activities[int(x)].successor.append(idx)
 
-maxEF = 0
+#fp
+TRT = 0
+
 for i in index:
-    if(len(activities[i].predeccesor)==0):
+    if(len(activities[i].predecessor)==0):
         activities[i].ef = activities[i].duration
     else:
         maxtime = 0
-        for x in activities[i].predeccesor:
-            if(maxtime<activities[x].ef):
+        for x in activities[i].predecessor:
+            if(maxtime < activities[x].ef):
                 maxtime = activities[x].ef
         activities[i].es = maxtime
-        activities[i].ef = maxtime+activities[i].duration
-    maxEF = max (maxEF,activities[i].ef)
-
+        activities[i].ef = maxtime + activities[i].duration
+    TRT = max(TRT,activities[i].ef)
 
 for idx in range(len(index)):
-    i = index[len(index)-idx-1]
+    i = index[len(index)-1-idx]
     if(len(activities[i].successor)==0):
-        activities[i].lf = maxEF
-        activities[i].ls = maxEF - activities[i].duration
-    else :
+        activities[i].lf = TRT
+        activities[i].ls = TRT - activities[i].duration
+    else:
         mintime = 9999
         for x in activities[i].successor:
             if(mintime>activities[x].ls):
@@ -57,8 +58,7 @@ for idx in range(len(index)):
         activities[i].ls = mintime - activities[i].duration
 
 result = []
-
 for i in index:
-    if(activities[i].ef==activities[i].lf):
+    if(activities[i].ef == activities[i].lf):
         result.append(activities[i].activity)
 print(result)
