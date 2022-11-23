@@ -13,6 +13,7 @@ public class demo {
         control.updateview();
         
         control.setname("nahid");
+        control.setname(model.getName());
         control.updateview();
 
     }
