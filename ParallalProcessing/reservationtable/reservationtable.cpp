@@ -18,6 +18,42 @@ vector<int> forbiddenLatency(vector<vector<int>> arr){
 
 }
 
+void taskTable (vector<vector<int>> &arr, vector<int> &assign) {
+    // task initiation
+    int i, j, k;
+    int row = arr.size();
+    int col = arr[1].size();
+    int n = assign.size();
+    vector <vector<int>> vec(row, vector<int>(col*5, 0));
+    for (j = 0; j < col; j++) {
+        for (i = 0; i < row; i++) {
+            for (k = 0; k < n; k++) {
+                if (arr[i][j]) {
+                    if (vec[i][j+assign[k]-1] == 0) {
+                        vec[i][j+assign[k]-1] = k+1;
+                    }
+                    else {
+                        cout << "Collision found!!!" << endl;
+                        cout << "task-" << k+1 << " collides with task-" << vec[i][j+assign[k]-1] << endl;
+                        cout << "at stage " << i+1 << " and time " << j+assign[k] << endl;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    cout << "Task table" << endl;
+    for (i = 0; i < vec.size(); i++) {
+        for (j = 0; j < vec[i].size(); j++) {
+            cout << vec[i][j] << " ";
+        }
+        cout << endl;
+    }
+    
+    cout << "No collision found" << endl;
+}
+
 int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
@@ -73,5 +109,14 @@ int main(){
     for(auto i:cv){
         cout<<i<<" ";
     }
+
+    int n;
+    cin>>n;
+    vector<int> assign(n);
+    for(int i=0;i<n;i++){
+        cin>>assign[i];
+    }
+    taskTable(arr,assign);
+
     return 0;
 }

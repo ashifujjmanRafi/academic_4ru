@@ -16,9 +16,9 @@ int main(){
             if(flag && isalpha(s[i])){
                 out.push_back(s[i]);
                 flag = false;
-                continue;
             }
             else if(!flag && isalpha(s[i])){
+
                 temp.push_back(s[i]);
             }
         }
