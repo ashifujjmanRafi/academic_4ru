@@ -1,10 +1,15 @@
-P1 to P2 : P2 is flow-dependent to P1
-P1 to P3 : P3 is flow-dependent to P1
-P1 to P4 : P4 is output-dependent to P1
-P1 to P5 : independent
-P2 to P3 : independent
-P2 to P4 : P4 is anti-dependent to P2
-P2 to P5 : independent
-P3 to P4 : P4 is anti-dependent to P3
-P3 to P5 : independent
-P4 to P5 : independent
+P1 and P2 are folow-dependent
+P1 and P3 are folow-dependent
+P1 and P4 are output-dependent
+P1 and P5 are in-dependent
+P2 and P3 are in-dependent
+P2 and P4 are folow-dependent
+P2 and P5 are in-dependent
+P3 and P4 are anti-dependent
+P3 and P5 are in-dependent
+P4 and P5 are in-dependent
+0 1 1 3 4 
+1 0 4 1 4 
+1 4 0 2 4 
+3 1 2 0 4 
+4 4 4 4 0 
