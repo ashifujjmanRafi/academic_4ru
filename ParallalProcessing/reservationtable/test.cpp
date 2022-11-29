@@ -21,32 +21,35 @@ vector<int> forbiddenlatency(vector<vector<int>> arr){
 }
 
 
-void taskTable(vector<vector<int>> &arr,vector<int> &assign){
+void taskTable(vector<vector<int>> arr,vector<int> assign){
     int r = arr.size();
     int c = arr[0].size();
     int n = assign.size();
     vector<vector<int>> vec(r,vector<int>(c*5,0));
     for(int j=0;j<c;j++){
-        for(int i=0;i<r;i++){
+        for(int i = 0;i<r;i++){
             for(int k = 0;k<n;k++){
                 if(arr[i][j]){
-                    if(vec[i][j+assign[k]-1]==0)
+                    if(vec[i][j+assign[k]-1]==0){
                         vec[i][j+assign[k]-1]=k+1;
+                    }
                     else{
-                        cout<<"collision found satge "<<k+1<<" and " <<vec[i][j+assign[k]-1]<<" colide at time "<<j+assign[k]<<endl;  
+                        cout<<"collision found between task "<<k+1<<" and task "<<vec[i][j+assign[k]-1]<<" ,at stage "<<i+1<<" time is ,"<<j+assign[k]<<endl;
                         return;
                     }
+                        
                 }
             }
         }
     }
-    cout<<"task table :"<<endl;
-    for(int i =0;i<vec.size();i++){
-        for(int j =0;j<vec[0].size();j++){
-            cout<<vec[i][j]<< " ";
+    cout<<"no collisoion vector found "<<endl;
+    for(int i = 0 ; i<vec.size();i++){
+        for(int j = 0;j<vec[0].size();j++){
+            cout<<vec[i][j]<<" ";
         }
         cout<<endl;
-    } 
+    }
+    
 }
 
 int main(){
