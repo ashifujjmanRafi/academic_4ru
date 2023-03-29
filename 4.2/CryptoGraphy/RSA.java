@@ -6,7 +6,8 @@ public class RSA {
     private BigInteger modulus;
     private BigInteger publicKey;
     private BigInteger privateKey;
-    private int bitLength = 1024; // length of the key in bits
+    private int bitLength = 1024; 
+    // length of the key in bits
     
     public RSA() {
         // generate random prime numbers
