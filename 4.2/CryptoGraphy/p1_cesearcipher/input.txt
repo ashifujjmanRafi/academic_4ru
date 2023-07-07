@@ -1,0 +1,7 @@
+
+    System.out.println(input);
+    cesercipher cc = new cesercipher(3,26);
+    String enc = cc.encryption(input);
+    System.out.println(enc);
+    String dec = cc.decryption(enc);
+    System.out.println(dec);
