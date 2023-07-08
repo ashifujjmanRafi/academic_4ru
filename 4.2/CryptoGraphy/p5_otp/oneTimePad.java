@@ -31,7 +31,7 @@ public class oneTimePad{
 
     public static void main(String[] args){
         oneTimePad otp = new oneTimePad("1234567890");
-        String enc = otp.encryption("hello world hello world quote hell");
+        String enc = otp.encryption("DEPT COMPUTER SCIENCE AND ENGINEERING");
         System.out.println(enc);
         String dec = otp.decryption(enc);
         System.out.println(dec);
