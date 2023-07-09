@@ -14,8 +14,8 @@ public class RSA {
         SecureRandom random = new SecureRandom();
         BigInteger p = new BigInteger(bitLength/2, 100, random);
         BigInteger q = new BigInteger(bitLength/2, 100, random);
-        // System.out.println("p: " + p);
-        // System.out.println("q: " + q);
+        System.out.println("p: " + p);
+        System.out.println("q: " + q);
 
         // compute modulus and totient
         modulus = p.multiply(q);
