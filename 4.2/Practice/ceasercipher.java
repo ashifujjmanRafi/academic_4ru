@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
 
 string cipher(string s,int key){
     string out = "";
