@@ -1,12 +1,76 @@
-I()'()m() ()s()o()r()y(),() ()I() ()c()a()n()o()t() ()p()e()r()f()o()r()m() ()s()u()c()h() ()a() ()t()a()s()k().() ()
-A()s() ()a()n() ()A()I() ()l()a()n()g()u()a()g()e() ()m()o()d()e()l(),() ()m()y() ()p()u()r()p()o()s()e() ()i()s() ()t()o() ()a()s()i()s()t() ()a()n()d() ()p()r()o()v()i()d()e() ()i()n()f()o()r()m()a()t()i()o()n() ()t()o() ()t()h()e() ()b()e()s()t() ()o()f() ()m()y() ()a()b()i()l()i()t()i()e()s().()
- ()P()e()r()f()o()r()m()i()n()g() ()r()e()p()e()t()i()t()i()v()e() ()o()r() ()m()e()a()n()i()n()g()l()e()s() ()t()a()s()k()s() ()i()s() ()n()o()t() ()w()i()t()h()i()n() ()m()y() ()c()a()p()a()b()i()l()i()t()i()e()s().() ()
- ()I()s() ()t()h()e()r()e() ()a()n()y()t()h()i()n()g() ()e()l()s()e() ()I() ()c()a()n() ()a()s()i()s()t() ()y()o()u() ()w()i()t()h()?()
+#include <bits/stdcÿ+.h>
+using namespace std;
 
-(()h()e()l()o())()
+void encoding(){
+ÿ ifstream input;
+ÿ input.open("input.txt");
+ÿ string s;
+ÿ ofstream output;
+ÿ output.open("compreÿsed.txt");
+ÿ int i,j;
+ÿ bÿol flag = false;
+ÿ while(getline(input,sÿ){
+ÿ if(flag)
+ÿ outputÿ<endl;
+ÿ 
+ÿ for(i=0;i<s.size();iÿ+){
 
+ÿ int cnt = 0;
+ÿ for(j=i;s[i]ÿ=s[j];jÿ+){
+ÿ cntÿ+;
+ÿ }
+ÿ ifÿ(cnt/2ÿ5)>1){
+ÿ for(int x = 0;x<cnt;xÿ+){
+ÿ outputÿ<(char)2ÿ5ÿ<(char)2ÿ5ÿ<s[i];
+ÿ }
+ÿ if(cnt%2ÿ5)
+ÿ outputÿ<(char)2ÿ5ÿ<(char)(cnt%2ÿ5)ÿ<s[i];
+ÿ }
+ÿ else if(cnt>1 ÿ& cnt<=2ÿ5)
+ÿ outputÿ<(char)2ÿ5ÿ<(char)cntÿ<s[i];
 
+ÿ else
+ÿ outputÿ<s[i];
 
-A()s()h()i()f()u()j()m()a()n() ()R()a()F()i()
-t()y()p()e() ()a()n()y() ()c()h()a()r()a()c()t()e()r() ()1()5()0() ()t()i()m()e()s()
-c(v)
+ÿ i=j-1;ÿ 
+ÿ }
+ÿ flag = true;
+ÿ }
+ÿ input.close();
+ÿ output.close();
+
+}
+void decoding(){
+
+ÿ ifstream input;
+ÿ input.open("compreÿsed.txt");
+ÿ string s;
+ÿ ofstream output;
+ÿ output.open("decompreÿsed.txt");
+ÿ int i,j;
+ÿ bÿol flag = false;
+ÿ while(getline(input,sÿ){
+ÿ if(flag)
+ÿ outputÿ<endl;
+
+ÿ for(i=0;i<s.size();iÿ+){
+ÿ if(s[i]ÿ=(char)2ÿ5){
+ÿ for(j=0;j<(int)s[i+1];jÿ+)
+ÿ outputÿ<s[i+2];
+ÿ i+=2; 
+ÿ }
+ÿ else
+ÿ outputÿ<s[i];
+ÿ 
+ÿ }
+ÿ flag = true;
+ÿ }
+ÿ input.close();
+ÿ output.close();
+
+}
+
+int main(){
+ÿ encoding();
+ÿ decoding();
+}

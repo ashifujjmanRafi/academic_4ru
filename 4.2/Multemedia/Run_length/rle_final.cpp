@@ -1,90 +1,69 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void RLE_encode(const string &input_file, const string &output_file)
-{
-    ifstream fin(input_file);
-    ofstream fout(output_file);
+void encoding(){
+    ifstream input;
+    input.open("input.txt");
 
-    string str;
-    int i, j;
+    ofstream output;
+    output.open("encrypted.txt");
+
+    string s;
     bool flag = false;
+    int i,j;
 
-    while (getline(fin, str))
-    {
-        if (flag)
-        {
-            fout << endl;
-        }
-
-        for (i = 0; i < str.size(); i++)
-        {
+    while(getline(input,s)){
+        if(flag)
+            output<<endl;
+        for(i=0;i<s.size();i++){
             int cnt = 0;
-            for (j = i; str[j] == str[i]; j++)
-            {
+            for(j=i;s[i]==s[j];j++)
                 cnt++;
-            }
-
-            fout << str[i] << "(" << (char)cnt << ")";
-            i = j - 1;
+            if(cnt>1)
+                output<<(char)255<<(char)cnt<<s[i];
+            else
+                output<<s[i];
+            i=j-1;
         }
-
         flag = true;
     }
-
-    fin.close();
-    fout.close();
+    input.close();
+    output.close();
 }
 
-void RLE_decode(const string &input_file, const string &output_file)
-{
-    ifstream fin(input_file);
-    ofstream fout(output_file);
+void decoding(){
 
-    string str;
-    int i, j;
+    ifstream input;
+    input.open("encrypted.txt");
+
+    ofstream output;
+    output.open("decrypted.txt");
+
+    string s;
     bool flag = false;
+    int i,j;
 
-    while (getline(fin, str))
-    {
-        if (flag)
-        {
-            fout << endl;
-        }
-
-        for (i = 0; str[i]; i++)
-        {
-            if (str[i] == '(')
-            {
-                int cnt = 0;
-                for (j = i + 1; str[j] && str[j] != ')'; j++)
-                {
-                    //cout<<(int)str[j]<<endl;
-                    cnt = cnt * 10 + (int)str[j];
+    while(getline(input,s)){
+        if(flag)
+            output<<endl;
+        for(i=0;i<s.size();i++){
+            if(s[i]==(char)255){
+                for(j=0;j<(int)s[i+1];j++){
+                    output<<s[i+2];
                 }
-                cout<<cnt<<endl;
-                for (j = 0; j < abs(cnt); j++)
-                {
-                    fout << str[i - 1];
-                }
+                i = i+2;
             }
+            else
+                output<<s[i];
         }
-
         flag = true;
     }
-
-    fin.close();
-    fout.close();
+    input.close();
+    output.close();
+    
 }
 
-int main()
-{
-    string input_file = "input.txt";
-    string compressed_file = "compressed.txt";
-    string decompressed_file = "decompressed.txt";
-
-    RLE_encode(input_file, compressed_file);
-    RLE_decode(compressed_file, decompressed_file);
-
-    return 0;
+int main(){
+    encoding();
+    decoding();
 }
